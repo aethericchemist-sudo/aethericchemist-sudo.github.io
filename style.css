@@ -28,6 +28,8 @@ p, li { color: #dcdcdc; }
        text-decoration: none; border: 1px solid var(--gold); }
 .btn.primary { background: var(--gold); color: #111; }
 .btn.ghost { color: var(--gold-soft); }
+button.btn { cursor: pointer; font: inherit; }
+button.btn:disabled { opacity: 0.6; cursor: wait; }
 .btn.off { border-color: var(--line); color: var(--muted); cursor: default; }
 .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px;
         margin: 16px 0; }

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buy TMAX | Aethericchemist</title>
+<meta name="description"
+ content="TMAX: a research-referenced testosterone guide for men, by Aethericchemist.">
+<link rel="icon" href="avatar.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+<a class="brand" href="index.html"><img src="avatar.png" alt="">AETHERICCHEMIST</a>
+<nav><a href="index.html">Home</a><a href="buy.html">Buy</a><a href="pricing.html">Pricing</a><a href="contact.html">Contact</a></nav>
+</div></header>
+<main><div class="wrap">
+<h1>Buy TMAX</h1>
+<p class="muted">87-page PDF ebook, instant download. Your price depends on where you are.</p>
+
+<div id="loading" class="card"><p>Finding the right checkout for your country...</p></div>
+
+<div id="india" class="card" hidden>
+<p><strong>India: &#8377;149</strong> &middot; UPI, Indian cards or netbanking</p>
+<button id="pay" class="btn primary" type="button">Pay &#8377;149</button>
+<p id="msg" class="muted" role="status"></p>
+<p class="muted">Not in India? <a href="https://aetherchemist.gumroad.com/l/tmax">Buy in US dollars</a>.
+Indian payment methods only; foreign cards are declined here.</p>
+</div>
+
+<div id="world" class="card" hidden>
+<p><strong>Outside India: US$9</strong>, lower in many countries (applied automatically at checkout).</p>
+<a class="btn primary" href="https://aetherchemist.gumroad.com/l/tmax">Buy on Gumroad</a>
+<p class="muted">In India? <a href="buy.html?region=in">Pay &#8377;149 with UPI</a>.</p>
+</div>
+
+<div id="done" class="card" hidden>
+<p><strong>Payment received. Thank you!</strong></p>
+<a id="dl" class="btn primary" href="#">Download TMAX (PDF)</a>
+<p class="muted">Save this page or the file now: the link works for 7 days and 5 downloads.
+Lost it? Email <a href="mailto:aethericchemist@gmail.com">aethericchemist@gmail.com</a> with your
+payment ID (in your Razorpay receipt email).</p>
+</div>
+
+<p class="muted">By buying you agree to the <a href="terms.html">Terms</a> and the
+<a href="refund.html">Refund Policy</a>. Educational guide, not medical advice.</p>
+
+<script>
+(function () {
+  var API = "https://tmax-taps.tmax-taps.workers.dev";
+  var $ = function (id) { return document.getElementById(id); };
+  function show(id) {
+    ["loading", "india", "world", "done"].forEach(function (x) { $(x).hidden = x !== id; });
+  }
+  function say(text) { $("msg").textContent = text; }
+
+  var forced = new URLSearchParams(location.search).get("region");
+  if (forced === "in") { show("india"); }
+  else if (forced === "world") { show("world"); }
+  else {
+    var timer = setTimeout(function () { show("world"); }, 5000);
+    fetch(API + "/country").then(function (r) { return r.json(); }).then(function (d) {
+      clearTimeout(timer);
+      show(d.country === "IN" ? "india" : "world");
+    }).catch(function () { clearTimeout(timer); show("world"); });
+  }
+
+  function loadCheckout() {
+    return new Promise(function (resolve, reject) {
+      if (window.Razorpay) { resolve(); return; }
+      var s = document.createElement("script");
+      s.src = "https://checkout.razorpay.com/v1/checkout.js";
+      s.onload = resolve;
+      s.onerror = function () { reject(new Error("checkout")); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function post(path, body) {
+    return fetch(API + path, {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+    }).then(function (r) {
+      return r.json().then(function (d) { if (!r.ok) { throw new Error(d.error || "error"); } return d; });
+    });
+  }
+
+  $("pay").addEventListener("click", function () {
+    $("pay").disabled = true;
+    say("Opening secure checkout...");
+    Promise.all([loadCheckout(), post("/order", {})]).then(function (res) {
+      var order = res[1];
+      var rzp = new window.Razorpay({
+        key: order.key_id, order_id: order.order_id, amount: order.amount, currency: order.currency,
+        name: "Aethericchemist", description: "TMAX ebook (PDF)",
+        image: "https://aethericchemist-sudo.github.io/avatar.png",
+        theme: { color: "#c9971f" },
+        handler: function (resp) {
+          say("Confirming your payment...");
+          post("/verify", resp).then(function (d) {
+            $("dl").href = d.download_url;
+            show("done");
+          }).catch(function () {
+            say("Payment received but not confirmed yet. Do not pay again: email " +
+                "aethericchemist@gmail.com with your payment ID and we will send the book.");
+          });
+        },
+        modal: { ondismiss: function () { $("pay").disabled = false; say("Payment cancelled."); } }
+      });
+      rzp.on("payment.failed", function () {
+        $("pay").disabled = false;
+        say("Payment failed. Only Indian UPI, cards and netbanking work here. If money left your " +
+            "account anyway, email aethericchemist@gmail.com with the payment ID.");
+      });
+      say("");
+      rzp.open();
+    }).catch(function () {
+      $("pay").disabled = false;
+      say("Could not open checkout. Check your connection and try again.");
+    });
+  });
+})();
+</script>
+</div></main>
+<footer><div class="wrap">
+<p class="links"><a href="index.html">Home</a><a href="buy.html">Buy</a><a href="about.html">About</a><a href="pricing.html">Pricing</a><a href="contact.html">Contact</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="shipping.html">Delivery</a></p>
+<p>&copy; 2026 Aethericchemist &middot; Chennai, Tamil Nadu, India &middot;
+<a href="mailto:aethericchemist@gmail.com">aethericchemist@gmail.com</a></p>
+</div></footer>
+</body>
+</html>
