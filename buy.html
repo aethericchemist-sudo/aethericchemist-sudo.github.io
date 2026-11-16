@@ -54,7 +54,23 @@ payment ID (in your Razorpay receipt email).</p>
   }
   function say(text) { $("msg").textContent = text; }
 
-  var forced = new URLSearchParams(location.search).get("region");
+  // Link source (?src=bio, ?src=dm ...) so the weekly report shows which link sells.
+  var params = new URLSearchParams(location.search);
+  var SRC = (params.get("src") || "direct").toLowerCase();
+  if (!/^[a-z0-9_-]{1,24}$/.test(SRC)) { SRC = "direct"; }
+  try {
+    fetch(API + "/hit", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ src: SRC }), keepalive: true }).catch(function () {});
+  } catch (e) { /* counting must never block the page */ }
+  Array.prototype.forEach.call(document.querySelectorAll("a[href*='gumroad.com']"), function (a) {
+    a.href += (a.href.indexOf("?") < 0 ? "?" : "&") + "utm_source=instagram&utm_medium=" +
+      encodeURIComponent(SRC) + "&utm_campaign=tmax";
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("a[href='buy.html?region=in']"), function (a) {
+    a.href += "&src=" + encodeURIComponent(SRC);
+  });
+
+  var forced = params.get("region");
   if (forced === "in") { show("india"); }
   else if (forced === "world") { show("world"); }
   else {
@@ -96,7 +112,7 @@ payment ID (in your Razorpay receipt email).</p>
         theme: { color: "#c9971f" },
         handler: function (resp) {
           say("Confirming your payment...");
-          post("/verify", resp).then(function (d) {
+          post("/verify", Object.assign({ src: SRC }, resp)).then(function (d) {
             $("dl").href = d.download_url;
             show("done");
           }).catch(function () {
