@@ -28,7 +28,7 @@ p, li { color: #dcdcdc; }
        text-decoration: none; border: 1px solid var(--gold); }
 .btn.primary { background: var(--gold); color: #111; }
 .btn.ghost { color: var(--gold-soft); }
-button.btn { cursor: pointer; font: inherit; }
+button.btn { cursor: pointer; font: inherit; font-weight: 700; }
 button.btn:disabled { opacity: 0.6; cursor: wait; }
 .btn.off { border-color: var(--line); color: var(--muted); cursor: default; }
 .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px;
@@ -42,3 +42,21 @@ footer .links { display: flex; flex-wrap: wrap; gap: 6px 14px; }
 @media (max-width: 680px) { html { font-size: 16px; } th, td { padding: 8px 4px; }
                             nav a { margin: 0 14px 0 0; } }
 footer p { font-size: 14px; color: var(--muted); }
+/* Buy page: one card per book; body.region-in / region-world hide the other region's prices. */
+.books { display: grid; gap: 16px; }
+.book { display: grid; grid-template-columns: 96px 1fr; gap: 18px; align-items: start; margin: 0; }
+.book img { width: 100%; border-radius: 4px; border: 1px solid var(--line); }
+.book.bundle { grid-template-columns: 150px 1fr; }
+.book .covers { display: flex; gap: 4px; }
+.book .covers img { width: 32%; }
+.book h3 { margin: 0 0 4px; font-size: 20px; color: var(--text); }
+.book p { margin: 6px 0; }
+.book.pick { border-color: var(--gold); }
+.tag { display: inline-block; background: var(--gold); color: #111; font-size: 12px; font-weight: 800;
+       padding: 2px 8px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+.price { font-size: 20px; font-weight: 800; color: var(--text); }
+.region-in .world, .region-world .in { display: none !important; }
+#dls .btn { margin: 6px 8px 6px 0; }
+@media (max-width: 680px) { .book { grid-template-columns: 72px 1fr; gap: 12px; }
+                            .book.bundle { grid-template-columns: 1fr; }
+                            .book.bundle .covers { max-width: 220px; } }

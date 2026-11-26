@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Buy TMAX | Aethericchemist</title>
+<title>Buy the books | Aethericchemist</title>
 <meta name="description"
- content="TMAX: a research-referenced testosterone guide for men, by Aethericchemist.">
+ content="Research-referenced ebooks for men by Aethericchemist: TMAX (testosterone),
+ GLOW (looks) and LOCK-IN (discipline).">
 <link rel="icon" href="avatar.png">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -15,69 +16,145 @@
 <nav><a href="index.html">Home</a><a href="buy.html">Buy</a><a href="pricing.html">Pricing</a><a href="contact.html">Contact</a></nav>
 </div></header>
 <main><div class="wrap">
-<h1>Buy TMAX</h1>
-<p class="muted">87-page PDF ebook, instant download. Your price depends on where you are.</p>
+<h1>Buy the books</h1>
+<p class="muted">PDF ebooks, instant download. Each book stands on its own; the bundle gets you all
+three. Your price depends on where you are.</p>
 
 <div id="loading" class="card"><p>Finding the right checkout for your country...</p></div>
 
-<div id="india" class="card" hidden>
-<p><strong>India: &#8377;149</strong> &middot; UPI, Indian cards or netbanking</p>
-<button id="pay" class="btn primary" type="button">Pay &#8377;149</button>
-<p id="msg" class="muted" role="status"></p>
-<p class="muted">Not in India? <a href="https://aetherchemist.gumroad.com/l/tmax">Buy in US dollars</a>.
-Indian payment methods only; foreign cards are declined here.</p>
+<div id="shop" hidden>
+<div class="books">
+
+<div class="card book bundle" id="book-bundle" data-product="bundle">
+<div class="covers"><img src="cover.jpg" alt="TMAX cover"><img src="cover-glow.jpg" alt="GLOW cover"><img
+src="cover-lockin.jpg" alt="LOCK-IN cover"></div>
+<div>
+<h3>All three books <span class="tag">Best value</span></h3>
+<p class="muted">TMAX + GLOW + LOCK-IN: hormones, looks and discipline. 3 PDFs.</p>
+<p class="in"><span class="price">&#8377;349</span> <span class="muted">instead of &#8377;447 for the three</span></p>
+<p class="world"><span class="price">US$22</span> <span class="muted">instead of US$27; lower in many countries</span></p>
+<button class="btn primary in" data-pay="bundle" type="button">Pay &#8377;349</button>
+<a class="btn primary world" href="https://aetherchemist.gumroad.com/l/bundle">Buy on Gumroad</a>
+</div>
 </div>
 
-<div id="world" class="card" hidden>
-<p><strong>Outside India: US$9</strong>, lower in many countries (applied automatically at checkout).</p>
-<a class="btn primary" href="https://aetherchemist.gumroad.com/l/tmax">Buy on Gumroad</a>
-<p class="muted">In India? <a href="buy.html?region=in">Pay &#8377;149 with UPI</a>.</p>
+<div class="card book" id="book-tmax" data-product="tmax">
+<img src="cover.jpg" alt="TMAX cover">
+<div>
+<h3>TMAX</h3>
+<p class="muted">The Complete Testosterone Optimization Bible. 87-page PDF, 37 PubMed-checked studies.</p>
+<p class="in"><span class="price">&#8377;149</span></p>
+<p class="world"><span class="price">US$9</span> <span class="muted">lower in many countries</span></p>
+<button class="btn primary in" data-pay="tmax" type="button">Pay &#8377;149</button>
+<a class="btn primary world" href="https://aetherchemist.gumroad.com/l/tmax">Buy on Gumroad</a>
+</div>
+</div>
+
+<div class="card book" id="book-glow" data-product="glow">
+<img src="cover-glow.jpg" alt="GLOW cover">
+<div>
+<h3>GLOW</h3>
+<p class="muted">The Evidence-Based Glow-Up for Men. 78-page PDF, 46 PubMed-checked studies.</p>
+<p class="in"><span class="price">&#8377;149</span></p>
+<p class="world"><span class="price">US$9</span> <span class="muted">lower in many countries</span></p>
+<button class="btn primary in" data-pay="glow" type="button">Pay &#8377;149</button>
+<a class="btn primary world" href="https://aetherchemist.gumroad.com/l/glow">Buy on Gumroad</a>
+</div>
+</div>
+
+<div class="card book" id="book-lockin" data-product="lockin">
+<img src="cover-lockin.jpg" alt="LOCK-IN cover">
+<div>
+<h3>LOCK-IN</h3>
+<p class="muted">The Evidence-Based Discipline Playbook for Men. 63-page PDF, 32 PubMed-checked studies.</p>
+<p class="in"><span class="price">&#8377;149</span></p>
+<p class="world"><span class="price">US$9</span> <span class="muted">lower in many countries</span></p>
+<button class="btn primary in" data-pay="lockin" type="button">Pay &#8377;149</button>
+<a class="btn primary world" href="https://aetherchemist.gumroad.com/l/lockin">Buy on Gumroad</a>
+</div>
+</div>
+
+</div>
+<p id="msg" class="muted" role="status"></p>
+<p class="muted in">UPI, Indian cards or netbanking. Not in India?
+<a href="buy.html?region=world">See prices in US dollars</a>; foreign cards are declined here.</p>
+<p class="muted world">In India? <a href="buy.html?region=in">Pay in rupees with UPI</a>.</p>
 </div>
 
 <div id="done" class="card" hidden>
 <p><strong>Payment received. Thank you!</strong></p>
-<a id="dl" class="btn primary" href="#">Download TMAX (PDF)</a>
-<p class="muted">Save this page or the file now: the link works for 7 days and 5 downloads.
-Lost it? Email <a href="mailto:aethericchemist@gmail.com">aethericchemist@gmail.com</a> with your
+<div id="dls"></div>
+<p class="muted">Save the files now: each link works for 7 days and 5 downloads.
+Lost them? Email <a href="mailto:aethericchemist@gmail.com">aethericchemist@gmail.com</a> with your
 payment ID (in your Razorpay receipt email).</p>
 </div>
 
 <p class="muted">By buying you agree to the <a href="terms.html">Terms</a> and the
-<a href="refund.html">Refund Policy</a>. Educational guide, not medical advice.</p>
+<a href="refund.html">Refund Policy</a>. Educational guides for adults, not medical advice.</p>
 
 <script>
 (function () {
   var API = "https://tmax-taps.tmax-taps.workers.dev";
+  var PRODUCTS = /^(tmax|glow|lockin|bundle)$/;
+  // Which products are published on Gumroad. Until one is, buyers outside India see
+  // "coming soon" for it instead of a dead link. Set to true once its Gumroad page is live.
+  var ON_GUMROAD = { tmax: true, glow: false, lockin: false, bundle: false };
   var $ = function (id) { return document.getElementById(id); };
-  function show(id) {
-    ["loading", "india", "world", "done"].forEach(function (x) { $(x).hidden = x !== id; });
-  }
+  var each = function (sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); };
   function say(text) { $("msg").textContent = text; }
+  function show(region) {
+    $("loading").hidden = true;
+    document.body.classList.remove("region-in", "region-world");
+    if (region === "done") { $("shop").hidden = true; $("done").hidden = false; return; }
+    document.body.classList.add("region-" + region);
+    $("shop").hidden = false;
+  }
 
   // Link source (?src=bio, ?src=dm ...) so the weekly report shows which link sells.
   var params = new URLSearchParams(location.search);
   var SRC = (params.get("src") || "direct").toLowerCase();
   if (!/^[a-z0-9_-]{1,24}$/.test(SRC)) { SRC = "direct"; }
+  // ?book=glow (from a post or DM) puts that book first.
+  var BOOK = (params.get("book") || "").toLowerCase();
+  if (!PRODUCTS.test(BOOK)) { BOOK = ""; }
   try {
     fetch(API + "/hit", { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ src: SRC }), keepalive: true }).catch(function () {});
   } catch (e) { /* counting must never block the page */ }
-  Array.prototype.forEach.call(document.querySelectorAll("a[href*='gumroad.com']"), function (a) {
+  each("a[href*='gumroad.com']", function (a) {
+    var card = a.closest("[data-product]");
     a.href += (a.href.indexOf("?") < 0 ? "?" : "&") + "utm_source=instagram&utm_medium=" +
-      encodeURIComponent(SRC) + "&utm_campaign=tmax";
+      encodeURIComponent(SRC) + "&utm_campaign=" + (card ? card.getAttribute("data-product") : "shop");
   });
-  Array.prototype.forEach.call(document.querySelectorAll("a[href='buy.html?region=in']"), function (a) {
-    a.href += "&src=" + encodeURIComponent(SRC);
+  each("[data-product]", function (card) {
+    if (ON_GUMROAD[card.getAttribute("data-product")]) { return; }
+    Array.prototype.forEach.call(card.querySelectorAll("a.world"), function (a) {
+      var soon = document.createElement("span");
+      soon.className = "btn off world";
+      soon.textContent = "Coming soon outside India";
+      a.parentNode.replaceChild(soon, a);
+    });
+    Array.prototype.forEach.call(card.querySelectorAll("p.world .muted"), function (m) {
+      m.textContent = "on Gumroad soon";
+    });
   });
+  each("a[href^='buy.html?region=']", function (a) {
+    a.href += "&src=" + encodeURIComponent(SRC) + (BOOK ? "&book=" + BOOK : "");
+  });
+  if (BOOK) {
+    var picked = $("book-" + BOOK);
+    picked.parentNode.insertBefore(picked, picked.parentNode.firstChild);
+    picked.classList.add("pick");
+  }
 
   var forced = params.get("region");
-  if (forced === "in") { show("india"); }
+  if (forced === "in") { show("in"); }
   else if (forced === "world") { show("world"); }
   else {
     var timer = setTimeout(function () { show("world"); }, 5000);
     fetch(API + "/country").then(function (r) { return r.json(); }).then(function (d) {
       clearTimeout(timer);
-      show(d.country === "IN" ? "india" : "world");
+      show(d.country === "IN" ? "in" : "world");
     }).catch(function () { clearTimeout(timer); show("world"); });
   }
 
@@ -100,39 +177,60 @@ payment ID (in your Razorpay receipt email).</p>
     });
   }
 
-  $("pay").addEventListener("click", function () {
-    $("pay").disabled = true;
+  function lock(on) { each("button[data-pay]", function (b) { b.disabled = on; }); }
+
+  function delivered(d) {
+    var box = $("dls");
+    box.textContent = "";
+    (d.downloads || [{ title: "your book", url: d.download_url }]).forEach(function (f) {
+      var a = document.createElement("a");
+      a.className = "btn primary";
+      a.href = f.url;
+      a.textContent = "Download " + f.title + " (PDF)";
+      box.appendChild(a);
+    });
+    show("done");
+  }
+
+  function pay(product) {
+    lock(true);
     say("Opening secure checkout...");
-    Promise.all([loadCheckout(), post("/order", {})]).then(function (res) {
+    Promise.all([loadCheckout(), post("/order", { product: product })]).then(function (res) {
       var order = res[1];
+      if (order.product !== product) { // never charge for something other than what was clicked
+        lock(false);
+        say("Checkout is being updated. Please try again in a few minutes.");
+        return;
+      }
       var rzp = new window.Razorpay({
         key: order.key_id, order_id: order.order_id, amount: order.amount, currency: order.currency,
-        name: "Aethericchemist", description: "TMAX ebook (PDF)",
+        name: "Aethericchemist", description: order.description,
         image: "https://aethericchemist-sudo.github.io/avatar.png",
         theme: { color: "#c9971f" },
         handler: function (resp) {
           say("Confirming your payment...");
-          post("/verify", Object.assign({ src: SRC }, resp)).then(function (d) {
-            $("dl").href = d.download_url;
-            show("done");
-          }).catch(function () {
+          post("/verify", Object.assign({ src: SRC }, resp)).then(delivered).catch(function () {
             say("Payment received but not confirmed yet. Do not pay again: email " +
-                "aethericchemist@gmail.com with your payment ID and we will send the book.");
+                "aethericchemist@gmail.com with your payment ID and we will send the books.");
           });
         },
-        modal: { ondismiss: function () { $("pay").disabled = false; say("Payment cancelled."); } }
+        modal: { ondismiss: function () { lock(false); say("Payment cancelled."); } }
       });
       rzp.on("payment.failed", function () {
-        $("pay").disabled = false;
+        lock(false);
         say("Payment failed. Only Indian UPI, cards and netbanking work here. If money left your " +
             "account anyway, email aethericchemist@gmail.com with the payment ID.");
       });
       say("");
       rzp.open();
     }).catch(function () {
-      $("pay").disabled = false;
+      lock(false);
       say("Could not open checkout. Check your connection and try again.");
     });
+  }
+
+  each("button[data-pay]", function (b) {
+    b.addEventListener("click", function () { pay(b.getAttribute("data-pay")); });
   });
 })();
 </script>
