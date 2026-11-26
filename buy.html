@@ -98,7 +98,7 @@ payment ID (in your Razorpay receipt email).</p>
   var PRODUCTS = /^(tmax|glow|lockin|bundle)$/;
   // Which products are published on Gumroad. Until one is, buyers outside India see
   // "coming soon" for it instead of a dead link. Set to true once its Gumroad page is live.
-  var ON_GUMROAD = { tmax: true, glow: true, lockin: true, bundle: false };
+  var ON_GUMROAD = { tmax: true, glow: true, lockin: true, bundle: true };
   var $ = function (id) { return document.getElementById(id); };
   var each = function (sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); };
   function say(text) { $("msg").textContent = text; }
